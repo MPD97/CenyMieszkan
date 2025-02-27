@@ -17,7 +17,7 @@ Stworzenie strony internetowej umożliwiającej przeglądanie i filtrowanie dany
 - `list.js`         // logika obsługi tabeli i filtrów
 - `script.js`       // główna logika aplikacji
 - `style.css`       // style aplikacji
-- `mieszkanka.db`   // baza danych SQLite
+- `mieszkanka_mega.db`   // baza danych SQLite
 
 ## Wymagania funkcjonalne
 

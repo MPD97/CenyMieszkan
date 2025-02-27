@@ -41,7 +41,7 @@ async function loadDatabaseData() {
         });
         
         // Pobranie pliku bazy danych
-        const response = await fetch('mieszkanka.db');
+        const response = await fetch('mieszkanka_mega.db');
         const arrayBuffer = await response.arrayBuffer();
         const uInt8Array = new Uint8Array(arrayBuffer);
         
