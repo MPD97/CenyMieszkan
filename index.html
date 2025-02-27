@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Baza Mieszkań</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.8.0/sql-wasm.js"></script>
+</head>
+<body>
+    <!-- Ekran ładowania -->
+    <div id="loader-container">
+        <div class="loader">
+            <div class="house-icon">🏠</div>
+            <p>Proszę czekać</p>
+            <p class="loading-info">Trwa ładowanie danych...</p>
+        </div>
+    </div>
+
+    <!-- Nagłówek strony (początkowo ukryty) -->
+    <header id="main-header" class="hidden">
+        <h1>Baza Mieszkań</h1>
+        <nav>
+            <button id="list-view-btn">Lista</button>
+            <button id="map-view-btn">Mapa</button>
+        </nav>
+    </header>
+
+    <!-- Kontener na zawartość (początkowo ukryty) -->
+    <main id="content-container" class="hidden">
+        <!-- Tu będzie dynamicznie ładowana zawartość (tabela lub mapa) -->
+    </main>
+
+    <!-- Stopka strony (początkowo ukryta) -->
+    <footer id="main-footer" class="hidden">
+        <div class="footer-content">
+            <div class="footer-info">
+                <h3>Baza Mieszkań</h3>
+                <p>Projekt bazy danych mieszkaniowych oparty o SQLite</p>
+                <p class="copyright">© 2023 Wszystkie prawa zastrzeżone</p>
+            </div>
+            <div class="footer-links">
+                <a href="#" id="portfolio-link" target="_blank">Portfolio twórcy</a>
+                <a href="#" id="about-link">O projekcie</a>
+                <a href="#" id="contact-link">Kontakt</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

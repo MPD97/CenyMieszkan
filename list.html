@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista Mieszkań</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="list-container">
+        <!-- Kontrolki filtrowania i wyświetlania -->
+        <div class="controls-container">
+            <div class="filtering-controls">
+                <h3>Filtry</h3>
+                <div id="filters-container"></div>
+                <button id="add-filter-btn" class="control-btn">Dodaj filtr</button>
+                <button id="clear-filters-btn" class="control-btn">Wyczyść filtry</button>
+            </div>
+            
+            <div class="display-controls">
+                <label for="records-per-page">Wyświetl:</label>
+                <select id="records-per-page">
+                    <option value="10">10</option>
+                    <option value="25">25</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                </select>
+                
+                <span id="showing-info">Wyświetlanie 0-0 z 0</span>
+            </div>
+        </div>
+        
+        <!-- Tabela z danymi -->
+        <div class="table-container">
+            <table id="properties-table">
+                <thead>
+                    <tr id="headers-row">
+                        <!-- Nagłówki będą generowane dynamicznie -->
+                    </tr>
+                </thead>
+                <tbody id="table-body">
+                    <!-- Dane będą generowane dynamicznie -->
+                </tbody>
+            </table>
+        </div>
+        
+        <!-- Paginacja -->
+        <div class="pagination-container">
+            <button id="prev-page-btn" class="pagination-btn" disabled>Poprzednia</button>
+            <div id="pagination-numbers"></div>
+            <button id="next-page-btn" class="pagination-btn" disabled>Następna</button>
+        </div>
+    </div>
+
+    <script src="list.js"></script>
+</body>
+</html>

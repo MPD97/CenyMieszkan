@@ -1,0 +1,416 @@
+/* Podstawowe style */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+}
+
+/* Ekran ładowania */
+#loader-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #f5f5f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.loader {
+    text-align: center;
+}
+
+.house-icon {
+    font-size: 50px;
+    animation: rotate 2s infinite linear;
+    margin-bottom: 20px;
+}
+
+.loading-info {
+    color: #666;
+    margin-top: 10px;
+}
+
+/* Animacja rotacji */
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Klasa do ukrywania elementów */
+.hidden {
+    display: none;
+}
+
+/* Podstawowe style dla nagłówka */
+header {
+    background-color: #4a6da7;
+    color: white;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+header h1 {
+    font-size: 1.5rem;
+    margin: 0;
+}
+
+nav button {
+    background-color: transparent;
+    border: 1px solid white;
+    color: white;
+    padding: 0.5rem 1rem;
+    margin-left: 0.5rem;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+nav button:hover {
+    background-color: rgba(255,255,255,0.2);
+}
+
+nav button.active {
+    background-color: white;
+    color: #4a6da7;
+    font-weight: bold;
+}
+
+/* Responsywność dla małych ekranów */
+@media (max-width: 600px) {
+    header {
+        flex-direction: column;
+        padding: 0.5rem;
+    }
+    
+    header h1 {
+        margin-bottom: 0.5rem;
+    }
+    
+    nav button {
+        margin: 0 0.25rem;
+        padding: 0.3rem 0.8rem;
+    }
+}
+
+/* Rozszerzone style dla stopki */
+footer {
+    background-color: #4a6da7;
+    color: white;
+    padding: 1rem;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    box-shadow: 0 -2px 5px rgba(0,0,0,0.2);
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer-info h3 {
+    margin: 0;
+    font-size: 1.2rem;
+}
+
+.footer-info p {
+    margin: 5px 0;
+    font-size: 0.9rem;
+}
+
+.copyright {
+    font-size: 0.8rem !important;
+    opacity: 0.8;
+}
+
+.footer-links {
+    display: flex;
+    gap: 15px;
+}
+
+footer a {
+    color: white;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    padding: 3px 5px;
+    border-radius: 4px;
+}
+
+footer a:hover {
+    background-color: rgba(255,255,255,0.2);
+    text-decoration: underline;
+}
+
+/* Responsywność dla stopki na małych ekranach */
+@media (max-width: 700px) {
+    .footer-content {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .footer-links {
+        margin-top: 10px;
+    }
+}
+
+/* Style dla głównego kontenera */
+#content-container {
+    padding: 20px;
+    margin-bottom: 70px; /* dodajemy miejsce na stopkę */
+    min-height: 300px;
+}
+
+/* Style dla modalów */
+.modal {
+    display: block;
+    position: fixed;
+    z-index: 1001;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.6);
+}
+
+.modal-content {
+    background-color: white;
+    margin: 15% auto;
+    padding: 20px;
+    border-radius: 8px;
+    width: 60%;
+    max-width: 500px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    position: relative;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover {
+    color: #4a6da7;
+}
+
+/* Style dla widoku listy */
+#list-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.controls-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.filtering-controls {
+    background-color: #f5f5f5;
+    padding: 15px;
+    border-radius: 8px;
+    flex: 1;
+    min-width: 300px;
+}
+
+.filtering-controls h3 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: #4a6da7;
+}
+
+#filters-container {
+    margin-bottom: 15px;
+}
+
+.filter-row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+    align-items: center;
+}
+
+.control-btn {
+    background-color: #4a6da7;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.control-btn:hover {
+    background-color: #3a5a8f;
+}
+
+.remove-filter-btn {
+    background-color: #e74c3c;
+}
+
+.remove-filter-btn:hover {
+    background-color: #c0392b;
+}
+
+.display-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#records-per-page {
+    padding: 6px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+}
+
+#showing-info {
+    margin-left: 10px;
+    color: #666;
+}
+
+/* Style dla tabeli */
+.table-container {
+    overflow-x: auto;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    border-radius: 8px;
+}
+
+#properties-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+}
+
+#properties-table th {
+    background-color: #4a6da7;
+    color: white;
+    text-align: left;
+    padding: 12px 15px;
+    position: sticky;
+    top: 0;
+    cursor: pointer;
+    user-select: none;
+}
+
+#properties-table th:hover {
+    background-color: #3a5a8f;
+}
+
+#properties-table th.sorted-asc::after {
+    content: " ▲";
+}
+
+#properties-table th.sorted-desc::after {
+    content: " ▼";
+}
+
+#properties-table td {
+    padding: 10px 15px;
+    border-bottom: 1px solid #ddd;
+}
+
+#properties-table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+#properties-table tbody tr:hover {
+    background-color: #f0f0f0;
+}
+
+/* Style dla paginacji */
+.pagination-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.pagination-btn {
+    background-color: #4a6da7;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.pagination-btn:hover:not(:disabled) {
+    background-color: #3a5a8f;
+}
+
+.pagination-btn:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+#pagination-numbers {
+    display: flex;
+    gap: 5px;
+}
+
+.page-number {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    cursor: pointer;
+    user-select: none;
+}
+
+.page-number.active {
+    background-color: #4a6da7;
+    color: white;
+}
+
+.page-number:hover:not(.active) {
+    background-color: #f0f0f0;
+}
+
+/* Responsywność */
+@media (max-width: 768px) {
+    .controls-container {
+        flex-direction: column;
+    }
+    
+    .filter-row {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .filter-row select, .filter-row input {
+        width: 100%;
+        margin-bottom: 5px;
+    }
+}
