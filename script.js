@@ -68,14 +68,11 @@ function hideLoader() {
     console.log('Loader powinien być ukryty');
 }
 
-// Dodajmy funkcję awaryjną, która ukryje loader po określonym czasie
+// Najpierw usuńmy funkcję awaryjnego ukrywania loadera
 function setupLoaderTimeout() {
-    // Ukryj loader po maksymalnie 8 sekundach, nawet jeśli ładowanie się nie zakończy
-    setTimeout(() => {
-        console.log('Uruchomiono awaryjne ukrycie loadera');
-        hideLoader();
-        showInterface();
-    }, 8000);
+    // Funkcja celowo pusta - nie chcemy już automatycznego ukrywania
+    // Loader będzie ukrywany dopiero po pełnym załadowaniu danych
+    console.log('Loader będzie widoczny do momentu załadowania danych');
 }
 
 // Pokaż interfejs aplikacji
@@ -175,12 +172,13 @@ function showListView() {
 function initializeListView() {
     // Mapowanie angielskich nazw kolumn na polskie i określenie widoczności
     const columnTranslations = {
-        'id': 'ID',
+        'id': 'ID', // Ukryta
         'developer': 'Deweloper',
         'investment': 'Inwestycja',
         'number': 'Numer',
         'area': 'Powierzchnia (m²)',
         'price': 'Cena (zł)',
+        'pricePerSqm': 'Cena za m²', // Nowa kolumna
         'country': 'Kraj',
         'voivodeship': 'Województwo',
         'county': 'Powiat',
@@ -197,7 +195,7 @@ function initializeListView() {
     };
 
     // Określenie kolumn do ukrycia
-    const hiddenColumns = ['lat', 'lng'];
+    const hiddenColumns = ['id', 'lat', 'lng']; // Dodano 'id' do ukrytych kolumn
 
     // Typy danych poszczególnych kolumn (dla filtrowania)
     const columnTypes = {
@@ -207,6 +205,7 @@ function initializeListView() {
         'number': 'string',
         'area': 'number',
         'price': 'number',
+        'pricePerSqm': 'number', // Dodanie typu dla nowej kolumny
         'country': 'string',
         'voivodeship': 'string',
         'county': 'string',
@@ -309,6 +308,14 @@ function initializeListView() {
                     }
                     rowData[column] = value;
                 });
+                
+                // Dodaj obliczenie ceny za m²
+                if (rowData.price && rowData.area && rowData.area > 0) {
+                    rowData.pricePerSqm = Math.round(rowData.price / rowData.area);
+                } else {
+                    rowData.pricePerSqm = null;
+                }
+                
                 return rowData;
             });
             
@@ -328,16 +335,19 @@ function initializeListView() {
     function generateSampleData() {
         const sampleData = [];
         
-        // Dodaj przykładowe dane
         for (let i = 1; i <= 30; i++) {
             const floorNum = Math.floor(Math.random() * 10) + 1;
+            const area = Math.round((40 + Math.random() * 100) * 10) / 10;
+            const price = Math.floor(500000 + Math.random() * 1500000);
+            
             sampleData.push({
                 id: i,
                 developer: `Developer ${String.fromCharCode(65 + (i % 10))}`,
                 investment: `Inwestycja ${i}`,
                 number: `${String.fromCharCode(65 + (i % 10))}-${100 + i}`,
-                area: Math.round((40 + Math.random() * 100) * 10) / 10,
-                price: Math.floor(500000 + Math.random() * 1500000),
+                area: area,
+                price: price,
+                pricePerSqm: Math.round(price / area), // Dodanie ceny za m²
                 country: 'Polska',
                 voivodeship: ['Mazowieckie', 'Małopolskie', 'Wielkopolskie', 'Pomorskie', 'Śląskie'][i % 5],
                 county: ['Warszawa', 'Kraków', 'Poznań', 'Gdańsk', 'Katowice'][i % 5],
@@ -700,6 +710,67 @@ function initializeListView() {
         ellipsis.textContent = '...';
         ellipsis.className = 'page-ellipsis';
         paginationNumbers.appendChild(ellipsis);
+    }
+
+    // Dodajmy brakującą funkcję applyFilters
+    function applyFilters() {
+        // Resetuj dane filtrowane do wszystkich danych
+        filteredData = [...allData];
+        
+        // Zastosuj wszystkie aktywne filtry
+        if (filters.length > 0) {
+            filteredData = filteredData.filter(item => {
+                return filters.every(filter => {
+                    const { column, operator, value } = filter;
+                    const itemValue = item[column];
+                    
+                    // Jeśli wartość w rekordzie jest null lub undefined, zawsze odrzuć
+                    if (itemValue === null || itemValue === undefined) {
+                        return false;
+                    }
+                    
+                    // Porównania na podstawie typu kolumny i operatora
+                    switch(columnTypes[column]) {
+                        case 'string':
+                            const itemStr = String(itemValue).toLowerCase();
+                            const valueStr = String(value).toLowerCase();
+                            
+                            switch(operator) {
+                                case 'contains': return itemStr.includes(valueStr);
+                                case 'equals': return itemStr === valueStr;
+                                case 'starts': return itemStr.startsWith(valueStr);
+                                case 'ends': return itemStr.endsWith(valueStr);
+                                default: return true;
+                            }
+                        
+                        case 'number':
+                            switch(operator) {
+                                case 'equals': return itemValue === value;
+                                case 'greater': return itemValue > value;
+                                case 'less': return itemValue < value;
+                                case 'between': 
+                                    // Dla operatora 'between' oczekujemy wartości w formacie "min-max"
+                                    if (typeof value === 'string' && value.includes('-')) {
+                                        const [min, max] = value.split('-').map(v => parseFloat(v.trim()));
+                                        return itemValue >= min && itemValue <= max;
+                                    }
+                                    return true;
+                                default: return true;
+                            }
+                        
+                        case 'boolean':
+                            return itemValue === value;
+                        
+                        default:
+                            return true;
+                    }
+                });
+            });
+        }
+        
+        // Resetuj paginację i renderuj tabelę
+        currentPage = 1;
+        renderTable();
     }
 
     // Inicjalizacja tabeli po załadowaniu

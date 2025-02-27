@@ -108,16 +108,17 @@ nav button.active {
     }
 }
 
-/* Rozszerzone style dla stopki */
+/* Mniejsza stopka */
 footer {
     background-color: #4a6da7;
     color: white;
-    padding: 1rem;
+    padding: 0.5rem; /* Zmniejszony padding */
     text-align: center;
     position: fixed;
     bottom: 0;
     width: 100%;
     box-shadow: 0 -2px 5px rgba(0,0,0,0.2);
+    font-size: 0.9rem; /* Mniejszy tekst */
 }
 
 .footer-content {
@@ -130,48 +131,46 @@ footer {
 
 .footer-info h3 {
     margin: 0;
-    font-size: 1.2rem;
+    font-size: 1rem; /* Mniejszy nagłówek */
 }
 
 .footer-info p {
-    margin: 5px 0;
-    font-size: 0.9rem;
+    margin: 2px 0; /* Mniejsze marginesy */
+    font-size: 0.8rem; /* Mniejszy tekst */
 }
 
 .copyright {
-    font-size: 0.8rem !important;
+    font-size: 0.7rem !important; /* Jeszcze mniejszy tekst copyright */
     opacity: 0.8;
 }
 
 .footer-links {
     display: flex;
-    gap: 15px;
+    gap: 10px; /* Mniejsze odstępy */
 }
 
 footer a {
     color: white;
     text-decoration: none;
-    font-size: 0.9rem;
+    font-size: 0.8rem; /* Mniejszy tekst linków */
     transition: all 0.3s ease;
-    padding: 3px 5px;
-    border-radius: 4px;
+    padding: 2px 3px; /* Mniejszy padding */
+    border-radius: 3px;
 }
 
-footer a:hover {
-    background-color: rgba(255,255,255,0.2);
-    text-decoration: underline;
+/* Dodajmy również style dla kolumn z cenami */
+#properties-table td:nth-child(6),
+#properties-table td:nth-child(7) {
+    text-align: right; /* Wyrównaj ceny do prawej */
+    font-weight: bold; /* Pogrubione ceny */
 }
 
-/* Responsywność dla stopki na małych ekranach */
-@media (max-width: 700px) {
-    .footer-content {
-        flex-direction: column;
-        gap: 10px;
-    }
-    
-    .footer-links {
-        margin-top: 10px;
-    }
+/* Formatowanie dla ceny za m² */
+#properties-table td:nth-child(7)::after {
+    content: " zł/m²";
+    font-weight: normal;
+    font-size: 0.9em;
+    opacity: 0.7;
 }
 
 /* Style dla głównego kontenera */
