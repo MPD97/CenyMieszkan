@@ -278,10 +278,10 @@ function initializeListView() {
             }
             
             // Wykonaj zapytanie do bazy
-            const results = window.db.exec('SELECT * FROM mieszkania LIMIT 1000');
+            const results = window.db.exec('SELECT * FROM mieszkanka LIMIT 1000');
             
             if (results.length === 0 || !results[0].values) {
-                throw new Error('Brak danych w tabeli mieszkania');
+                throw new Error('Brak danych w tabeli mieszkanka');
             }
             
             // Przekształć wyniki zapytania na tablicę obiektów
